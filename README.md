@@ -6,7 +6,7 @@ This is a simple python script that uses the haveibeenpwned API to determine if 
 
 ## Usage
 
-    $ pyhon pwned.py password
+    $ python pwned.py password
     SHA1: 5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8
     Password compromised 3645804 times.
 
