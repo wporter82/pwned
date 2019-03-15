@@ -4,14 +4,32 @@ import argparse
 import hashlib
 import urllib.request
 import urllib.parse
+from getpass import getpass
 
 parser = argparse.ArgumentParser()
-parser.add_argument("password", help="Password to check if pwned")
+parser.add_argument('-v', '--verbose', action="store_true", help="Show more info including typed password and SHA1")
 args = parser.parse_args()
 
-hash_object = hashlib.sha1(args.password.encode())
+password = ''
+
+while password == '':
+    password = getpass('Type a password to check: ')
+    password_verify = getpass('Retype the password to confirm: ')
+
+    if password != password_verify:
+        print("Passwords do not match, please try again.")
+        password = ''
+
+    elif password == '':
+        print("You must enter a password to check")
+
+hash_object = hashlib.sha1(password.encode())
 hex_digest = hash_object.hexdigest().upper()
-print("SHA1:", hex_digest)
+
+if(args.verbose):
+    print("----- Verbose Output -----")
+    print("Password:", password)
+    print("SHA1:", hex_digest)
 
 url = "https://api.pwnedpasswords.com/range/" + hex_digest[0:5]
 

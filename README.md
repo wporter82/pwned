@@ -6,11 +6,21 @@ This is a simple python script that uses the haveibeenpwned API to determine if 
 
 ## Usage
 
-    $ python pwned.py password
-    SHA1: 5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8
+    $ python pwned.py
+    Type a password to check:
+    Retype the password to confirm:
     Password compromised 3645804 times.
 
-**NOTE: You may need to surround your password with single quotes ('password') if it contains special characters that can be interpreted by the command line processor.**
+**NOTE: The password prompt will not show what you are typing for security reasons. If you have the need to see the password and SHA1 you can use the verbose option as shown below.
+
+
+    $ python pwned.py -v
+    Type a password to check:
+    Retype the password to confirm:
+    ----- Verbose Output -----
+    Password: password
+    SHA1: 5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8
+    Password compromised 3645804 times.
 
 ## What is it doing?
 
