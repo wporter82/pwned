@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 
 import argparse
-import hashlib
-import urllib.request
-import urllib.parse
+from hashlib import sha1
+from urllib import request
 from getpass import getpass
 
 parser = argparse.ArgumentParser()
@@ -23,7 +22,7 @@ while password == '':
     elif password == '':
         print("You must enter a password to check")
 
-hash_object = hashlib.sha1(password.encode())
+hash_object = sha1(password.encode())
 hex_digest = hash_object.hexdigest().upper()
 
 if(args.verbose):
@@ -33,8 +32,8 @@ if(args.verbose):
 
 url = "https://api.pwnedpasswords.com/range/" + hex_digest[0:5]
 
-request = urllib.request.Request(url, headers={'User-Agent': "pwned.py"})
-result = urllib.request.urlopen(request)
+requestObj = request.Request(url, headers={'User-Agent': "pwned.py"})
+result = request.urlopen(requestObj)
 response = result.read().decode("utf-8")
 
 compromised = False
